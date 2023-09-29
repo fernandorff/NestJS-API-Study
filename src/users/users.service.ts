@@ -26,6 +26,10 @@ export class UsersService {
     });
   }
 
+  findAll() {
+    return this.repository.find();
+  }
+
   async update(id: number, attrs: Partial<User>) {
     const user = await this.findOne(id);
     if (!user) {
@@ -35,10 +39,13 @@ export class UsersService {
     return this.repository.save(user);
   }
 
-  async remove(id: number) {
+  async remove(id: number, session: any) {
     const user = await this.findOne(id);
     if (!user) {
       throw new NotFoundException('user not found');
+    }
+    if (id === session.userId) {
+      session.userId = null;
     }
     return this.repository.remove(user);
   }

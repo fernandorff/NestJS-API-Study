@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 const cookieSession = require('cookie-session');
 
@@ -33,6 +34,13 @@ async function bootstrap() {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
+
+  const config = new DocumentBuilder()
+    .setTitle('NestJS API')
+    .setDescription('User and authentication')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 }
