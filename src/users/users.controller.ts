@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -62,6 +63,16 @@ export class UsersController {
   @ApiOperation({ summary: 'Return user by email.' })
   findAllUsersByEmail(@Query('email') email: string) {
     return this.usersService.findAllByEmail(email);
+  }
+
+  @Get('/:id')
+  @ApiOperation({ summary: 'Return user by id.' })
+  async findById(@Param('id') id: string) {
+    const user = await this.usersService.findOne(parseInt(id));
+    if (!user) {
+      throw new NotFoundException('user not found');
+    }
+    return user;
   }
 
   @Get('/all')
