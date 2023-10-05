@@ -8,10 +8,11 @@ import { ReportDto } from "./dtos/report.dto";
 import { User } from "../users/user.entity";
 import { CurrentUser } from "../users/decorators/current-user.decorator";
 
-@Controller('reports')
-@ApiTags('Reports')
+@Controller("reports")
+@ApiTags("Reports")
 export class ReportsController {
-  constructor(private reportsService: ReportsService) {}
+  constructor(private reportsService: ReportsService) {
+  }
 
   @Get()
   @Serialize(ReportDto)

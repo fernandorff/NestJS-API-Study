@@ -3,7 +3,8 @@ import { UsersService } from "./users.service";
 
 @Injectable()
 export class CurrentUserInterceptor implements NestInterceptor {
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService) {
+  }
 
   async intercept(context: ExecutionContext, handler: CallHandler<any>) {
     const request = context.switchToHttp().getRequest();
