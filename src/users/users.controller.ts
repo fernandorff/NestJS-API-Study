@@ -9,17 +9,17 @@ import {
   Post,
   Query,
   Session,
-  UseGuards,
-} from '@nestjs/common';
-import { Serialize } from '../interceptors/serialize.interceptor';
-import { UserDto } from './dtos/user.dto';
-import { UsersService } from './users.service';
-import { AuthGuard } from '../guards/auth.guard';
-import { CurrentUser } from './decorators/current-user.decorator';
-import { CreateUserDto } from './dtos/create-user.dto';
-import { UpdateUserDto } from './dtos/update-user.dto';
-import { AuthService } from './auth.service';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+  UseGuards
+} from "@nestjs/common";
+import { Serialize } from "../interceptors/serialize.interceptor";
+import { UserDto } from "./dtos/user.dto";
+import { UsersService } from "./users.service";
+import { AuthGuard } from "../guards/auth.guard";
+import { CurrentUser } from "./decorators/current-user.decorator";
+import { CreateUserDto } from "./dtos/create-user.dto";
+import { UpdateUserDto } from "./dtos/update-user.dto";
+import { AuthService } from "./auth.service";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
 @Controller('auth')
 @ApiTags('Authentication')

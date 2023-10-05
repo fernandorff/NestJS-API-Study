@@ -1,32 +1,25 @@
-import {
-  IsLatitude,
-  IsLongitude,
-  IsNumber,
-  IsString,
-  Max,
-  Min,
-} from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { IsLatitude, IsLongitude, IsNumber, IsString, Max, Min } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateReportDto {
   @IsString()
-  @ApiProperty({ example: 'make' })
+  @ApiProperty({ example: "Fiat" })
   make: string;
 
   @IsString()
-  @ApiProperty({ example: 'model' })
+  @ApiProperty({ example: "Uno" })
   model: string;
 
   @IsNumber()
   @Min(1930)
   @Max(2050)
-  @ApiProperty({ example: 2023 })
+  @ApiProperty({ example: "2020" })
   year: number;
 
   @IsNumber()
   @Min(0)
   @Max(1000000)
-  @ApiProperty({ example: 111 })
+  @ApiProperty({ example: "10000" })
   mileage: number;
 
   @IsLongitude()
@@ -40,6 +33,6 @@ export class CreateReportDto {
   @IsNumber()
   @Min(0)
   @Max(1000000)
-  @ApiProperty({ example: 999 })
+  @ApiProperty({ example: 50000 })
   price: number;
 }
