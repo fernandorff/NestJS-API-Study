@@ -8,11 +8,11 @@ import {
   Patch,
   Session,
 } from '@nestjs/common';
-import { Serialize } from '../../../interceptors/serialize.interceptor';
-import { UserDto } from '../dtos/user.dto';
 import { UsersService } from '../services/users.service';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Serialize } from '../../../interceptors/serialize.interceptor';
+import { UserDto } from '../dtos/user.dto';
 
 @Controller('user')
 @ApiTags('Users')

@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Expose, Transform } from 'class-transformer';
 
 export class UserDto {
   @Expose()
@@ -6,6 +6,9 @@ export class UserDto {
 
   @Expose()
   email: string;
+
+  @Expose()
+  admin: boolean;
 
   @Expose()
   firstName: string;
@@ -18,4 +21,8 @@ export class UserDto {
 
   @Expose()
   birth: Date;
+
+  @Transform(({ obj }) => obj.otmExample?.map((example) => example.id))
+  @Expose()
+  otmExampleIds: number[];
 }

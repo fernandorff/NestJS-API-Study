@@ -17,7 +17,12 @@ export class UsersService {
     if (!id) {
       return null;
     }
-    return this.repository.findOneBy({ id });
+    return this.repository.findOne({
+      where: {
+        id: id,
+      },
+      relations: ['otmExample'],
+    });
   }
 
   findAllByEmail(email: string) {
@@ -27,7 +32,9 @@ export class UsersService {
   }
 
   findAll() {
-    return this.repository.find();
+    return this.repository.find({
+      relations: ['otmExample'],
+    });
   }
 
   async update(id: number, attrs: Partial<User>) {

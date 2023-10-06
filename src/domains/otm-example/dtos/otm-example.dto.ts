@@ -10,7 +10,7 @@ export class OtmExampleDto {
   @Expose()
   number: number;
 
-  @Transform(({ obj }) => obj.user?.id)
   @Expose()
+  @Transform(({ obj }) => obj.user?.id)
   userId: number;
 }

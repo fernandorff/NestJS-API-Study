@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { OtmExampleEntity } from '../../../domains/otm-example/entities/otm-example.entity';
+import { OtmExample } from '../../../domains/otm-example/entities/otm.example';
 
 @Entity()
 export class User {
@@ -27,6 +27,6 @@ export class User {
   @Column({ type: 'date', nullable: true })
   birth: Date | null;
 
-  @OneToMany(() => OtmExampleEntity, (otmExample) => otmExample.user)
-  otmExample: OtmExampleEntity[];
+  @OneToMany((type) => OtmExample, (otmExample) => otmExample.user)
+  otmExample: OtmExample[];
 }

@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OtmExampleController } from './controllers/otm-example.controller';
 import { OtmExampleService } from './services/otm-example.service';
-import { OtmExampleEntity } from './entities/otm-example.entity';
+import { OtmExample } from './entities/otm.example';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([OtmExampleEntity])],
+  imports: [TypeOrmModule.forFeature([OtmExample])],
   controllers: [OtmExampleController],
   providers: [OtmExampleService],
 })

@@ -7,7 +7,8 @@ import * as process from 'process';
 import { APP_PIPE } from '@nestjs/core';
 import { User } from './access-control/users/entities/user.entity';
 import { UsersModule } from './access-control/users/users.module';
-import { OtmExampleEntity } from './domains/otm-example/entities/otm-example.entity';
+import { OtmExample } from './domains/otm-example/entities/otm.example';
+import { OtmExampleModule } from './domains/otm-example/otm-example.module';
 
 const cookieSession = require('cookie-session');
 
@@ -24,11 +25,13 @@ const cookieSession = require('cookie-session');
           type: 'sqlite',
           database: config.get<string>('DB_NAME'),
           synchronize: true,
-          entities: [User, OtmExampleEntity],
+          entities: [User, OtmExample],
+          autoLoadEntities: true,
         };
       },
     }),
     UsersModule,
+    OtmExampleModule,
     TypeOrmModule,
   ],
   controllers: [AppController],
