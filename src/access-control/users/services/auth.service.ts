@@ -2,19 +2,18 @@ import { randomBytes, scrypt as _scrypt } from "crypto";
 import { promisify } from "util";
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { UsersService } from "./users.service";
+import { async } from "rxjs";
 
 const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {
-  }
+  constructor(private usersService: UsersService) {}
 
   async signUp(email: string, password: string) {
     const users = await this.usersService.findAllByEmail(email);
     if (users.length) {
-      throw new BadRequestException("E-mail already in use");
-    }
+      throw new BadRequestException('E-"E-mail already in use"    }
 
     const salt = randomBytes(8).toString("hex");
 

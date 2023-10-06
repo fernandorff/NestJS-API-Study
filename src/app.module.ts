@@ -2,35 +2,35 @@ import { MiddlewareConsumer, Module, ValidationPipe } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { User } from "./users/user.entity";
-import { UsersModule } from "./users/users.module";
-import { ReportsModule } from "./reports/reports.module";
-import { Report } from "./reports/report.entity";
+import { User } from "./access-control/users/entities/user.entity";
+import { UsersModule } from "./access-control/users/users.module";
+import { OtmExampleModule } from "./domains/otm-example/otm-example.module";
+import { OtmExampleEntity } from "./domains/otm-example/entities/otm-example.entity";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import * as process from "process";
 import { APP_PIPE } from "@nestjs/core";
 
-const cookieSession = require("cookie-session");
+const cookieSession = require('cookie-session');
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `.env.${process.env.NODE_ENV}`
+      envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         return {
-          type: "sqlite",
-          database: config.get<string>("DB_NAME"),
+          type:"sqlite"',
+          database: config.get<string>"DB_NAME"'),
           synchronize: true,
-          entities: [User, Report]
+          entities: [User, OtmExampleEntity]
         };
-      }
+      },
     }),
     UsersModule,
-    ReportsModule
+    OtmExampleModule
   ],
   controllers: [AppController],
   providers: [
@@ -39,9 +39,9 @@ const cookieSession = require("cookie-session");
       provide: APP_PIPE,
       useValue: new ValidationPipe({
         whitelist: true
-      })
-    }
-  ]
+      }),
+    },
+  ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
@@ -49,7 +49,7 @@ export class AppModule {
       .apply(
         cookieSession({
           keys: ["keys"]
-        })
+        }),
       )
       .forRoutes("*");
   }
