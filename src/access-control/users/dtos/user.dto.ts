@@ -1,4 +1,6 @@
-import { Expose, Transform } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
+import { MtmExampleDto } from '../../../domains/mtm-example/dtos/mtm-example.dto';
+import { OtmExampleDto } from '../../../domains/otm-example/dtos/otm-example.dto';
 
 export class UserDto {
   @Expose()
@@ -22,11 +24,11 @@ export class UserDto {
   @Expose()
   birth: Date;
 
-  @Transform(({ obj }) => obj.otmExample?.map((otm) => otm.id))
   @Expose()
-  otmExampleIds: number[] = [];
+  @Type(() => MtmExampleDto) // Specify the class to use for serialization
+  mtmExamples: MtmExampleDto[];
 
-  @Transform(({ obj }) => obj.mtmExamples?.map((mtm) => mtm.id))
   @Expose()
-  mtmExampleIds: number[] = [];
+  @Type(() => OtmExampleDto) // Specify the class to use for serialization
+  otmExamples: OtmExampleDto[];
 }

@@ -36,7 +36,7 @@ export class User {
   birth: Date | null;
 
   @OneToMany(() => OtmExample, (otmExample) => otmExample.user)
-  otmExample: OtmExample[];
+  otmExamples: OtmExample[];
 
   @ManyToMany(() => MtmExample, (mtmExample) => mtmExample.users)
   @JoinTable({

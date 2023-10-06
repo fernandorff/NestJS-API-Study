@@ -1,4 +1,5 @@
-import { Expose, Transform } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
+import { UserDto } from '../../../access-control/users/dtos/user.dto';
 
 export class MtmExampleDto {
   @Expose()
@@ -11,6 +12,6 @@ export class MtmExampleDto {
   number: number;
 
   @Expose()
-  @Transform(({ obj }) => obj.users?.map((user) => user.id))
-  userIds: number[] = [];
+  @Type(() => UserDto) // Specify the class to use for serialization
+  users: UserDto[];
 }

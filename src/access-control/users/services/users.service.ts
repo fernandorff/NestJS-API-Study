@@ -25,7 +25,7 @@ export class UsersService {
       where: {
         id: id,
       },
-      relations: ['otmExample', 'mtmExamples'],
+      relations: ['otmExamples', 'mtmExamples'],
     });
   }
 
@@ -37,7 +37,7 @@ export class UsersService {
 
   findAll() {
     return this.repository.find({
-      relations: ['otmExample', 'mtmExamples'],
+      relations: ['otmExamples', 'mtmExamples'],
     });
   }
 

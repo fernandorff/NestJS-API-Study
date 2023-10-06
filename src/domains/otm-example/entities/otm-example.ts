@@ -12,6 +12,6 @@ export class OtmExample {
   @Column()
   number: number;
 
-  @ManyToOne(() => User, (user) => user.otmExample)
+  @ManyToOne(() => User, (user) => user.otmExamples)
   user: User;
 }

@@ -1,4 +1,5 @@
-import { Expose, Transform } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
+import { UserDto } from '../../../access-control/users/dtos/user.dto';
 
 export class OtmExampleDto {
   @Expose()
@@ -11,6 +12,6 @@ export class OtmExampleDto {
   number: number;
 
   @Expose()
-  @Transform(({ obj }) => obj.user?.id)
-  userId: number;
+  @Type(() => UserDto) // Specify the class to use for serialization
+  user: UserDto;
 }
