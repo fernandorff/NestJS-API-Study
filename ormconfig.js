@@ -1,4 +1,4 @@
-var dbConfig = {
+const dbConfig = {
   synchronize: false,
   migrations: ['migrations/*.js'],
   cli: {
@@ -7,25 +7,25 @@ var dbConfig = {
 };
 
 switch (process.env.NODE_ENV) {
-  case"development"':
+  case 'development':
     Object.assign(dbConfig, {
-      type: "sqlite",
-      database: "db.sqlite",
-      entities: ["**/*.entity.js"]
+      type: 'sqlite',
+      database: 'db.sqlite',
+      entities: ['**/*.entity.js'],
     });
     break;
-  case "test":
+  case 'test':
     Object.assign(dbConfig, {
-      type: "sqlite",
-      database: "test.sqlite",
-      entities: ["**/*.entity.ts"],
-      migrationsRun: true
+      type: 'sqlite',
+      database: 'test.sqlite',
+      entities: ['**/*.entity.ts'],
+      migrationsRun: true,
     });
     break;
-  case "production":
+  case 'production':
     break;
   default:
-    throw new Error("unknown environment");
+    throw new Error('unknown environment');
 }
 
 module.exports = dbConfig;

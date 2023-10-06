@@ -11,18 +11,21 @@ import { CurrentUser } from '../../../access-control/users/decorators/current-us
 @Controller('otm-example')
 @ApiTags('One To Many - Example')
 export class OtmExampleController {
-  constructor(private reportsService: OtmExampleService) {}
+  constructor(private otmExampleService: OtmExampleService) {}
 
   @Get()
   @Serialize(OtmExampleDto)
   findAll() {
-    return this.reportsService.findAll();
+    return this.otmExampleService.findAll();
   }
 
   @Post()
   @UseGuards(AuthGuard)
   @Serialize(OtmExampleDto)
-  createReport(@Body() body: CreateOtmExampleDto, @CurrentUser() user: User) {
-    return this.reportsService.create(body, user);
+  createOtmExample(
+    @Body() body: CreateOtmExampleDto,
+    @CurrentUser() user: User,
+  ) {
+    return this.otmExampleService.create(body, user);
   }
 }

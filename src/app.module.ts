@@ -1,14 +1,13 @@
-import { MiddlewareConsumer, Module, ValidationPipe } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import { User } from "./access-control/users/entities/user.entity";
-import { UsersModule } from "./access-control/users/users.module";
-import { OtmExampleModule } from "./domains/otm-example/otm-example.module";
-import { OtmExampleEntity } from "./domains/otm-example/entities/otm-example.entity";
-import { ConfigModule, ConfigService } from "@nestjs/config";
-import * as process from "process";
-import { APP_PIPE } from "@nestjs/core";
+import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import * as process from 'process';
+import { APP_PIPE } from '@nestjs/core';
+import { User } from './access-control/users/entities/user.entity';
+import { UsersModule } from './access-control/users/users.module';
+import { OtmExampleEntity } from './domains/otm-example/entities/otm-example.entity';
 
 const cookieSession = require('cookie-session');
 
@@ -22,15 +21,15 @@ const cookieSession = require('cookie-session');
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         return {
-          type:"sqlite"',
-          database: config.get<string>"DB_NAME"'),
+          type: 'sqlite',
+          database: config.get<string>('DB_NAME'),
           synchronize: true,
-          entities: [User, OtmExampleEntity]
+          entities: [User, OtmExampleEntity],
         };
       },
     }),
     UsersModule,
-    OtmExampleModule
+    TypeOrmModule,
   ],
   controllers: [AppController],
   providers: [
@@ -38,7 +37,7 @@ const cookieSession = require('cookie-session');
     {
       provide: APP_PIPE,
       useValue: new ValidationPipe({
-        whitelist: true
+        whitelist: true,
       }),
     },
   ],
@@ -48,9 +47,9 @@ export class AppModule {
     consumer
       .apply(
         cookieSession({
-          keys: ["keys"]
+          keys: ['keys'],
         }),
       )
-      .forRoutes("*");
+      .forRoutes('*');
   }
 }

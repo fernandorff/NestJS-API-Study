@@ -1,8 +1,11 @@
-import { randomBytes, scrypt as _scrypt } from "crypto";
-import { promisify } from "util";
-import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
-import { UsersService } from "./users.service";
-import { async } from "rxjs";
+import { randomBytes, scrypt as _scrypt } from 'crypto';
+import { promisify } from 'util';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { UsersService } from './users.service';
 
 const scrypt = promisify(_scrypt);
 
@@ -13,13 +16,14 @@ export class AuthService {
   async signUp(email: string, password: string) {
     const users = await this.usersService.findAllByEmail(email);
     if (users.length) {
-      throw new BadRequestException('E-"E-mail already in use"    }
+      throw new BadRequestException('E-mail already in use');
+    }
 
-    const salt = randomBytes(8).toString("hex");
+    const salt = randomBytes(8).toString('hex');
 
     const hash = (await scrypt(password, salt, 32)) as Buffer;
 
-    const result = salt + "." + hash.toString("hex");
+    const result = salt + '.' + hash.toString('hex');
 
     return await this.usersService.create(email, result);
   }
@@ -28,15 +32,15 @@ export class AuthService {
     const [user] = await this.usersService.findAllByEmail(email);
 
     if (!user) {
-      throw new NotFoundException("User not found.");
+      throw new NotFoundException('User not found.');
     }
 
-    const [salt, storedHash] = user.password.split(".");
+    const [salt, storedHash] = user.password.split('.');
 
     const hash = (await scrypt(password, salt, 32)) as Buffer;
 
-    if (storedHash !== hash.toString("hex")) {
-      throw new BadRequestException("Incorrect password");
+    if (storedHash !== hash.toString('hex')) {
+      throw new BadRequestException('Incorrect password');
     }
 
     return user;

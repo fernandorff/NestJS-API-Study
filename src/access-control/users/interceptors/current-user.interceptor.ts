@@ -1,5 +1,10 @@
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
-import { UsersService } from "../services/users.service";
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+} from '@nestjs/common';
+import { UsersService } from '../services/users.service';
 
 @Injectable()
 export class CurrentUserInterceptor implements NestInterceptor {
@@ -10,7 +15,7 @@ export class CurrentUserInterceptor implements NestInterceptor {
     const { userId } = request.session || {};
 
     console.log(request.session);
-    console.log('re"request.session"
+    console.log('request.session');
     if (userId) {
       request.currentUser = await this.usersService.findOne(userId);
     }
