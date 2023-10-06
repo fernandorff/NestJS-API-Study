@@ -7,7 +7,6 @@ import {
   Param,
   Patch,
   Post,
-  Query,
   Session,
   UseGuards
 } from "@nestjs/common";
@@ -60,12 +59,6 @@ export class UsersController {
     return user;
   }
 
-  @Get()
-  @ApiOperation({ summary: "Return user by email." })
-  findAllUsersByEmail(@Query("email") email: string) {
-    return this.usersService.findAllByEmail(email);
-  }
-
   @Get("/:id")
   @ApiOperation({ summary: "Return user by id." })
   async findById(@Param("id") id: string) {
@@ -76,9 +69,10 @@ export class UsersController {
     return user;
   }
 
-  @Get("/all")
+  @Get()
   @ApiOperation({ summary: "Returns all registered users." })
   findAllUsers() {
+    console.log("aaaaaaaaaaa");
     return this.usersService.findAll();
   }
 
