@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateOtmExampleDto } from '../dtos/create-otm-example.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { OtmExample } from '../entities/otm.example';
-import { User } from '../../../access-control/users/entities/user.entity';
+import { OtmExample } from '../entities/otm-example';
+import { User } from '../../../access-control/users/entities/user';
 
 @Injectable()
 export class OtmExampleService {

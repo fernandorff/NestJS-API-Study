@@ -1,11 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../entities/user.entity';
+import { User } from '../entities/user';
 import { Repository } from 'typeorm';
+import { MtmExampleService } from '../../../domains/mtm-example/services/mtm-example.service';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User) private repository: Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private repository: Repository<User>,
+    private mtmExampleService: MtmExampleService,
+  ) {}
 
   create(email: string, password: string) {
     const user = this.repository.create({ email, password });
@@ -21,7 +25,7 @@ export class UsersService {
       where: {
         id: id,
       },
-      relations: ['otmExample'],
+      relations: ['otmExample', 'mtmExamples'],
     });
   }
 
@@ -33,7 +37,7 @@ export class UsersService {
 
   findAll() {
     return this.repository.find({
-      relations: ['otmExample'],
+      relations: ['otmExample', 'mtmExamples'],
     });
   }
 
@@ -55,5 +59,16 @@ export class UsersService {
       session.userId = null;
     }
     return this.repository.remove(user);
+  }
+
+  async addMtmExample(user: User, mtmExampleId: number) {
+    const mtmExample = await this.mtmExampleService.findOne(mtmExampleId);
+
+    if (!user.mtmExamples) {
+      user.mtmExamples = [];
+    }
+
+    user.mtmExamples.push(mtmExample);
+    return await this.repository.save(user);
   }
 }

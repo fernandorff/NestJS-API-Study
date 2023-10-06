@@ -5,9 +5,10 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as process from 'process';
 import { APP_PIPE } from '@nestjs/core';
-import { User } from './access-control/users/entities/user.entity';
+import { User } from './access-control/users/entities/user';
 import { UsersModule } from './access-control/users/users.module';
-import { OtmExample } from './domains/otm-example/entities/otm.example';
+import { MtmExample } from './domains/mtm-example/entities/mtm-example';
+import { MtmExampleModule } from './domains/mtm-example/mtm-example.module';
 import { OtmExampleModule } from './domains/otm-example/otm-example.module';
 
 const cookieSession = require('cookie-session');
@@ -25,13 +26,14 @@ const cookieSession = require('cookie-session');
           type: 'sqlite',
           database: config.get<string>('DB_NAME'),
           synchronize: true,
-          entities: [User, OtmExample],
+          entities: [User, MtmExample, MtmExample],
           autoLoadEntities: true,
         };
       },
     }),
     UsersModule,
     OtmExampleModule,
+    MtmExampleModule,
     TypeOrmModule,
   ],
   controllers: [AppController],

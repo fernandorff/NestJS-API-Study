@@ -22,7 +22,11 @@ export class UserDto {
   @Expose()
   birth: Date;
 
-  @Transform(({ obj }) => obj.otmExample?.map((example) => example.id))
+  @Transform(({ obj }) => obj.otmExample?.map((otm) => otm.id))
   @Expose()
-  otmExampleIds: number[];
+  otmExampleIds: number[] = [];
+
+  @Transform(({ obj }) => obj.mtmExamples?.map((mtm) => mtm.id))
+  @Expose()
+  mtmExampleIds: number[] = [];
 }

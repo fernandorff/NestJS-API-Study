@@ -7,20 +7,18 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { CreateOtmExampleDto } from '../dtos/create-otm-example.dto';
-import { OtmExampleService } from '../services/otm-example.service';
+import { CreateMtmExampleDto } from '../dtos/create-mtm-example.dto';
+import { MtmExampleService } from '../services/mtm-example.service';
 import { AuthGuard } from '../../../access-control/guards/auth.guard';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Serialize } from '../../../interceptors/serialize.interceptor';
-import { OtmExampleDto } from '../dtos/otm-example.dto';
-import { User } from '../../../access-control/users/entities/user';
-import { CurrentUser } from '../../../access-control/users/decorators/current-user.decorator';
+import { MtmExampleDto } from '../dtos/mtm-example.dto';
 
-@Controller('otm-example')
-@ApiTags('One To Many - Example')
-@Serialize(OtmExampleDto)
-export class OtmExampleController {
-  constructor(private otmExampleService: OtmExampleService) {}
+@Controller('mtm-example')
+@ApiTags('Many To Many - Example')
+@Serialize(MtmExampleDto)
+export class MtmExampleController {
+  constructor(private otmExampleService: MtmExampleService) {}
 
   @Get()
   findAll() {
@@ -39,10 +37,7 @@ export class OtmExampleController {
 
   @Post()
   @UseGuards(AuthGuard)
-  createOtmExample(
-    @Body() body: CreateOtmExampleDto,
-    @CurrentUser() user: User,
-  ) {
-    return this.otmExampleService.create(body, user);
+  createOtmExample(@Body() body: CreateMtmExampleDto) {
+    return this.otmExampleService.create(body);
   }
 }

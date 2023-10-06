@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from '../../../access-control/users/entities/user.entity';
+import { User } from '../../../access-control/users/entities/user';
 
 @Entity()
 export class OtmExample {
