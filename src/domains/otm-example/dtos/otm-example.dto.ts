@@ -12,6 +12,6 @@ export class OtmExampleDto {
   number: number;
 
   @Expose()
-  @Type(() => UserDto) // Specify the class to use for serialization
+  @Type(() => UserDto)
   user: UserDto;
 }

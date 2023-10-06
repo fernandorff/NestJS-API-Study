@@ -12,6 +12,6 @@ export class MtmExampleDto {
   number: number;
 
   @Expose()
-  @Type(() => UserDto) // Specify the class to use for serialization
+  @Type(() => UserDto)
   users: UserDto[];
 }

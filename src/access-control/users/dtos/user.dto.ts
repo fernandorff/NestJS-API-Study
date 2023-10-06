@@ -25,10 +25,10 @@ export class UserDto {
   birth: Date;
 
   @Expose()
-  @Type(() => MtmExampleDto) // Specify the class to use for serialization
+  @Type(() => MtmExampleDto)
   mtmExamples: MtmExampleDto[];
 
   @Expose()
-  @Type(() => OtmExampleDto) // Specify the class to use for serialization
+  @Type(() => OtmExampleDto)
   otmExamples: OtmExampleDto[];
 }
