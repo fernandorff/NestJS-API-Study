@@ -10,6 +10,7 @@ import { UsersModule } from './access-control/users/users.module';
 import { MtmExample } from './domains/mtm-example/entities/mtm-example';
 import { MtmExampleModule } from './domains/mtm-example/mtm-example.module';
 import { OtmExampleModule } from './domains/otm-example/otm-example.module';
+import { EmployeeModule } from './domains/employee/employee.module';
 
 const cookieSession = require('cookie-session');
 
@@ -34,6 +35,7 @@ const cookieSession = require('cookie-session');
     UsersModule,
     OtmExampleModule,
     MtmExampleModule,
+    EmployeeModule,
     TypeOrmModule,
   ],
   controllers: [AppController],

@@ -22,10 +22,7 @@ async function bootstrap() {
     module.hot.dispose(() => app.close());
   }
 
-  const config = new DocumentBuilder()
-    .setTitle('NestJS API')
-    .setDescription('User and authentication')
-    .build();
+  const config = new DocumentBuilder().setTitle('NestJS API').build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 

@@ -4,13 +4,16 @@ import {
   JoinTable,
   ManyToMany,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { MtmExample } from '../../../domains/mtm-example/entities/mtm-example';
 import { OtmExample } from '../../../domains/otm-example/entities/otm-example';
+import { Employee } from '../../../domains/employee/entities/employee';
+import { BaseAuditEntity } from '../../../abstractions/entities/base-audit.entity';
 
 @Entity()
-export class User {
+export class User extends BaseAuditEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,17 +26,8 @@ export class User {
   @Column({ default: false })
   admin: boolean;
 
-  @Column({ nullable: true })
-  firstName: string | null;
-
-  @Column({ nullable: true })
-  lastName: string | null;
-
-  @Column({ nullable: true })
-  cpf: string | null;
-
-  @Column({ type: 'date', nullable: true })
-  birth: Date | null;
+  @OneToOne(() => Employee, (employee) => employee.user)
+  employee: Employee;
 
   @OneToMany(() => OtmExample, (otmExample) => otmExample.user)
   otmExamples: OtmExample[];
